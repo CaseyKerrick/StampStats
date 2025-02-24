@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import GraphCalculator from './modules/GraphCalculator';
+import StampLogoUrl from './stamp_logo.png';
+import { data } from './data.js';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app">
+      <header className="appHeader">
+        <div className='headerTitle'>
+          <div className='titleText'>Stamp</div>
+          <div className='stampGuyContainer'><img src={StampLogoUrl} className='stampGuy' /></div>
+          <div className='titleText'>Stats</div>
+        </div>
+        <hr />
       </header>
+      <GraphCalculator stamps={data} />
     </div>
   );
 }

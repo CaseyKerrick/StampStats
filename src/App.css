@@ -1,38 +1,46 @@
-.App {
+.app {
+  width: 70%;
+  max-width: 1000px;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 100vh;
+  border: 5px solid #00a5d6;
+  border-radius: 15px;
+}
+
+body {
+  background-color: #00bdf5;
+  color: #3b3b3b;
+}
+
+.appHeader {
   text-align: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  /* padding-bottom: -20px; */
+  /* border-bottom: 5px solid #00a5d6; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.stampGuy {
+  width: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.stampGuyContainer {
+  display: inline-flex;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.headerTitle {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  color: black;
+  font-family: "Georgia";
+  font-weight: bold;
+  font-size: 50px;
+  /* height: 100px; */
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  div {
+    margin: 10px;
   }
 }
