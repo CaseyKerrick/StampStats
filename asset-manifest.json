@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/StampStats/static/css/main.10ec2bba.css",
+    "main.js": "/StampStats/static/js/main.b40a39c8.js",
+    "static/js/453.87a739f3.chunk.js": "/StampStats/static/js/453.87a739f3.chunk.js",
+    "static/media/stamp_logo.png": "/StampStats/static/media/stamp_logo.2c94adb562f18165eca5.png",
+    "static/media/blue-pie-icon.png": "/StampStats/static/media/blue-pie-icon.60b2a0ad8dbb143b1506.png",
+    "index.html": "/StampStats/index.html",
+    "main.10ec2bba.css.map": "/StampStats/static/css/main.10ec2bba.css.map",
+    "main.b40a39c8.js.map": "/StampStats/static/js/main.b40a39c8.js.map",
+    "453.87a739f3.chunk.js.map": "/StampStats/static/js/453.87a739f3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.10ec2bba.css",
+    "static/js/main.b40a39c8.js"
+  ]
+}
