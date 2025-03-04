@@ -2,4 +2,4 @@ export const data = [{"Last Name":"Aaron","First Names":"Hank ","Release Year":"
 
 export const columnNames = ["Release Year", "Gender", "Profession", "Race", "Sun Sign", "LGBTQ", "State of Birth", "Country of Birth"];
 
-export const crimeTypes = ["Eugenicist", "Embezzler", "Child SA", "DV", "Enslaver", "Known Racist"]
+export const horrorTypes = ["Eugenicist", "Embezzler", "Child SA", "DV", "Enslaver", "Known Racist"];

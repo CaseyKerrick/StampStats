@@ -1,43 +1,20 @@
 import React from 'react';
 import './App.css';
 import GraphCalculator from './modules/GraphCalculator';
+import DisplayData from './modules/DisplayData';
 import StampLogoUrl from './resources/stamp_logo.png';
-import { data, columnNames } from './data.js';
-import { createMultiList } from './util/transformStampData.js';
+import { data, columnNames, horrorTypes } from './data.js';
+import { shapeStampData } from './util/transformStampData.js';
+
 
 function App() {
+
   const [modifiedData, setModifiedData] = React.useState({});
   const [modifiedColumnNames, setModifiedColumnNames] = React.useState([]);
-
+  const [selectedPage, setSelectedPage] = React.useState(0);
 
   React.useMemo(() => {
-    const newModifiedData = {
-      'Release Year': createMultiList(data.map(person => person['Release Year']).join(', ').split(', ')),
-      'Gender': createMultiList(data.map(person => person['Gender'])),
-      'Profession': createMultiList(data.map(person => person['Profession']).join(', ').split(', ')),
-      'Race': createMultiList(data.map(person => person['Race'])),
-      'Sun Sign': createMultiList(data.map(person => person['Sun Sign'])),
-      'LGBTQ': createMultiList(data.map(person => person['LGBTQ'])),
-      'State of Birth': createMultiList(data.map(person => person['State of Birth'])),
-      'Country of Birth': createMultiList(data.map(person => person['Country of Birth'])),
-      'Offenses': {
-        'Eugenicist': data.filter(person => person['Eugenicist'] === 'Yes').length,
-        'Embezzler': data.filter(person => person['Embezzler'] === 'Yes').length,
-        'Child SA': data.filter(person => person['Child SA'] === 'Yes').length,
-        'DV': data.filter(person => person['DV'] === 'Yes').length,
-        'Enslaver': data.filter(person => person['Enslaver'] === 'Yes').length,
-        'Known Racist': data.filter(person => person['Known Racist'] === 'Yes').length,
-        'None': data.filter(person => person['Eugenicist'] !== 'Yes'
-                                        && person['Embezzler'] !== 'Yes'
-                                        && person['Child SA'] !== 'Yes'
-                                        && person['DV'] !== 'Yes'
-                                        && person['Enslaver'] !== 'Yes'
-                                        && person['Known Racist'] !== 'Yes').length,
-      },
-    };
-
-    console.log(newModifiedData['Offenses']['None']);
-
+    const newModifiedData = shapeStampData(data);
     setModifiedData(newModifiedData);
     setModifiedColumnNames(Object.keys(newModifiedData));
   }, []);
@@ -51,8 +28,16 @@ function App() {
           <div className='stampGuyContainer'><img src={StampLogoUrl} className='stampGuy' alt='A sillouette of a person on a stamp' /></div>
           <div className='titleText'>Stats</div>
         </div>
+        <div className='navbar'>
+          <div className={`navItem ${selectedPage === 0 && 'navItemSelected'}`} onClick={() => setSelectedPage(0)}>Charts</div>
+          <div className={`navItem ${selectedPage === 1 && 'navItemSelected'}`} onClick={() => setSelectedPage(1)}>Raw Data</div>
+          <div className={`navItem ${selectedPage === 2 && 'navItemSelected'}`} onClick={() => setSelectedPage(2)}>Stats</div>
+        </div>
+        <hr className='navSeparator' />
       </header>
-      <GraphCalculator stamps={modifiedData} columnNames={modifiedColumnNames} />
+      { selectedPage === 0 && <GraphCalculator stamps={modifiedData} columnNames={modifiedColumnNames} /> }
+      { selectedPage === 1 && <DisplayData stamps={data} columnNames={['Last Name', 'First Names', ...columnNames]} horrors={horrorTypes} /> }
+      
       {/* <div className='footer'>
         <a href="https://www.flaticon.com/free-icons/pie-chart" title="pie chart icons">Pie chart icons created by Pixel perfect - Flaticon</a>
         <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by srip - Flaticon</a>

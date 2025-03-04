@@ -1,0 +1,33 @@
+td {
+  /* border: 1px solid black; */
+  /* text-align: center; */
+  width: 10%;
+  height: 30px;
+}
+
+th {
+  text-align: left;
+}
+
+table {
+  border: 3px solid #00a5d6;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 0 0;
+  margin-bottom: 25px;
+  border-radius: 10px;
+}
+
+.tableHeader {
+  background-color: #00a5d6;
+  color: white;
+}
+
+.whiteBackground {
+
+}
+
+.grayBackground {
+  background-color: #00bdf511;
+}
