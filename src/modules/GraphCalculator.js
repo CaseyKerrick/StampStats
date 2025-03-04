@@ -1,55 +1,73 @@
 import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title, CategoryScale } from 'chart.js';
+import { Pie, Bar } from 'react-chartjs-2';
+import { randomColorsList } from '../util/general';
 import './GraphCalculator.css';
 import PieChartUrl from '../resources/blue-pie-icon.png';
 import BarChartUrl from '../resources/blue-bar-icon.png';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
-function GraphCalculator( { stamps }) {
+function GraphCalculator( { stamps, columnNames }) {
   const [chartType, setChartType] = React.useState(1);
+  const [columnType, setColumnType] = React.useState('Release Year');
+
+  console.log(chartType);
 
   const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: Object.keys(stamps[columnType]),
     datasets: [
       {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
+        label: '# of People',
+        data: Object.keys(stamps[columnType]).map(key => stamps[columnType][key]),
+        backgroundColor: randomColorsList(Object.keys(stamps[columnType]).length),
+        borderColor: ['rgba(255, 255, 255, 1)'],
         borderWidth: 3,
       },
     ],
   };
 
+  const options = {
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'left',
+      },
+      title: {
+        display: true,
+        text: columnType,
+      },
+    },
+  };
   
   
   return (
     <>
       <div className='graphContainer'>
-        <Pie data={data} className='graph' />
+        { chartType === 1 && <Pie data={data} options={options} className='graph' /> }
+        {/* { chartType === 2 && <Bar data={data} className='graph' /> } */}
       </div>
       <form className='graphForm'>
-        <div className='type'>
-          <input type='radio' id='radioPie' name='graphType' value={1} class='graphType' onClick={() => setChartType(1)} />
-          <label for='radioPie'><img src={PieChartUrl} alt='Pie chart icon' className={`chartIcon ${chartType === 1 ? 'chartIconSelected' : ''}`} /></label>
-          <input type='radio' id='radioBar' name='graphType' value={2} class='graphType' onClick={() => setChartType(2)} />
-          <label for='radioBar'><img src={BarChartUrl} alt='Bar chart icon' className={`chartIcon ${chartType === 2 ? 'chartIconSelected' : ''}`} /></label>
+        <div className='dataType'>
+          { columnNames.map(column => 
+              <div key={column} className={`columnTypeContainer ${column === columnType && 'columnTypeSelected'}`}>
+                <input
+                  type='radio'
+                  id={column}
+                  value={column}
+                  name='columnType'
+                  className='radioChoice'
+                  onClick={() => setColumnType(column)}
+                />
+                <label htmlFor={column} className='radioChoiceLabel'>{column}</label>
+              </div>
+          )}
+        </div>
+        <div className='chartType'>
+          <input type='radio' id='radioPie' name='graphType' value={1} className='radioChoice' onClick={() => setChartType(1)} />
+          <label htmlFor='radioPie'><img src={PieChartUrl} alt='Pie chart icon' className={`chartIcon ${chartType === 1 ? 'chartIconSelected' : ''}`} /></label>
+          <input type='radio' id='radioBar' name='graphType' value={2} className='radioChoice' onClick={() => setChartType(2)} />
+          <label htmlFor='radioBar'><img src={BarChartUrl} alt='Bar chart icon' className={`chartIcon ${chartType === 2 ? 'chartIconSelected' : ''}`} /></label>
         </div>
       </form>
     </>

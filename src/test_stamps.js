@@ -4,7 +4,7 @@ const rawCsvData = fs.readFileSync('./test_stamps.tsv', 'utf8');
 const rawLines = rawCsvData.split('\r\n');
 rawLines.shift();
 
-const columnNames = rawLines[0].split('\t');
+const columnNames = rawLines.shift().split('\t');
 const separatedLines = rawLines.map(line => {
   const values = line.split('\t');
 
@@ -15,6 +15,5 @@ const separatedLines = rawLines.map(line => {
 
   return lineObj;
 });
-console.log(separatedLines);
 
-fs.writeFileSync('./test.txt', JSON.stringify(separatedLines));
+fs.writeFileSync('./test.txt', 'export const data = ' + JSON.stringify(separatedLines) + ';\n\n' + 'export const columnNames = ' + JSON.stringify(columnNames) + ';\n');
